@@ -1,0 +1,56 @@
+\newcommand{\shapeneta}{330} % 726 297
+\newcommand{\shapenetb}{66}
+\newcommand{\shapenetc}{132}
+\newcommand{\shapenetd}{198}
+\newcommand{\shapenete}{726}
+
+\begin{figure}
+    \vspace*{-\figskipabove px}
+    \centering
+    
+    \begin{subfigure}[t]{0.5\textwidth}
+        \begin{subfigure}{0.19\textwidth}
+            \centering\vspace{0px}
+            \includegraphics[height=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapeneta_gt_only}
+        \end{subfigure}
+        \begin{subfigure}{0.19\textwidth}
+            \centering\vspace{0px}
+            \includegraphics[height=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapenetb_gt_only}
+        \end{subfigure}
+        \begin{subfigure}{0.19\textwidth}
+            \centering\vspace{0px}\textbf{}
+            \includegraphics[height=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapenetc_gt_only}
+        \end{subfigure}
+        \begin{subfigure}{0.19\textwidth}
+            \centering\vspace{0px}
+            \includegraphics[height=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapenetd_gt_only}
+        \end{subfigure}
+        \begin{subfigure}{0.19\textwidth}
+            \centering\vspace{0px}
+            \includegraphics[height=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapenete_gt_only}
+        \end{subfigure}
+        \subcaption{Reference Shapes $\mathcal{Y}$}
+    \end{subfigure}
+    \\
+    \begin{subfigure}[t]{0.29\textwidth}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\vspace{0px}
+            \includegraphics[height=2cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapeneta_bin_points}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.49\textwidth}
+            \centering\vspace{0px}
+            \includegraphics[height=2cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapeneta_bin_space}
+        \end{subfigure}
+        \subcaption{Observation $x_n$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.18\textwidth}
+        \centering\vspace{0px}
+        \includegraphics[height=2cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\shapeneta_bin_only}
+        \subcaption{Ground Truth $y_n^*$}
+    \end{subfigure}
+    \vspace*{-\figskipcaption px}
+    \caption{{\bf Weakly-Supervised Shape Completion.} Given reference shapes $\mathcal{Y}$ and incomplete observations $\mathcal{X}$, we want to learn a mapping $x_n \mapsto \tilde{y}(x_n)$ such that $\tilde{y}(x_n)$ matches the \emph{unknown} ground truth shape $y_n^*$ as close as possible. The observations $x_n$ are split into free space (\ie, $x_{n,i} = 0$, right) and point observations (\ie, $x_{n,i} = 1$, left). Shapes are shown in {\color{rbeige}beige} and observations in {\color{rred}red}.}
+    \label{fig:method-problem}
+    \vspace*{-\figskipbelow px}
+\end{figure}

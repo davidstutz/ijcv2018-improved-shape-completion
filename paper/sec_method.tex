@@ -1,0 +1,157 @@
+\section{Method}
+\label{sec:method}
+
+In the following, we introduce the mathematical formulation of the weakly-supervised 3D shape completion problem. Subsequently, we briefly discuss the concept of (denoising) variational auto-encoders (\DVAEs) \citep{Kingma2014ICLR,Im2017AAAI} which we use to learn a shape prior. Finally, we formally derive our proposed amortized maximum likelihood (\AML) approach, as illustrated in \figref{fig:method}.
+
+\subsection{Problem Formulation}
+
+\input{fig_method_problem}
+
+In a supervised setting, the task of 3D shape completion can be described as follows: Given a set of incomplete observations $\mathcal{X} = \{x_n\}_{n = 1}^N \subseteq \mathbb{R}^R$ and corresponding ground truth shapes $\mathcal{Y}^* = \{y_n^*\}_{n = 1}^N \subseteq \mathbb{R}^R$, learn a mapping $x_n \mapsto y_n^*$ that is able to generalize to previously unseen observations and possibly across object categories. We assume $\mathbb{R}^R$ to be a suitable representation of observations and shapes; in practice, we resort to occupancy grids and signed distance functions (SDFs) defined on regular grids, \ie, $x_n, y_n^* \in \mathbb{R}^{H \ntimes W \ntimes D} \simeq \mathbb{R}^R$. Specifically, occupancy grids indicate occupied space, \ie, voxel $y_{n,i}^* = 1$ if and only if the voxel lies on or inside the shape's surface. To represent shapes with sub-voxel accuracy, SDFs hold the distance of each voxel's center to the surface; for voxels inside the shape's surface, we use negative sign.
+Finally, for the (incomplete) observations, we write $x_n \in \{0, 1, \uk\}^R$ to make missing information explicit; in particular, $x_{n,i} = \uk$ corresponds to unobserved voxels, while $x_{n,i} = 1$ and $x_{n,i} = 0$ correspond to occupied and unoccupied voxels, respectively.
+
+On real data, \eg, KITTI \citep{Geiger2012CVPR}, supervised learning is often not possible as obtaining ground truth annotations is labor intensive, \cf \citep{Menze2015CVPR,Xie2016CVPR}. Therefore, we target a weakly-supervised variant of the problem instead: Given observations $\mathcal{X}$ and reference shapes $\mathcal{Y} = \{y_m\}_{m = 1}^M \subseteq \mathbb{R}^R$ both of the same, known object category, learn a mapping $x_n \mapsto \tilde{y}(x_n)$ such that the predicted shape $\tilde{y}(x_n)$ matches the unknown ground truth shape $y_n^*$ as close as possible -- or, in practice, the sparse observation $x_n$ while being plausible considering the set of reference shapes, \cf \figref{fig:method-problem}. Here, supervision is provided in the form of the known object category. Alternatively, the reference shapes $\mathcal{Y}$ can also include multiple object categories resulting in an even weaker notion of supervision as the correspondence between observations and object categories is unknown. On real data, \eg, KITTI, we additionally assume the object locations to be given in the form of 3D bounding boxes in order to extract the corresponding observations $\mathcal{X}$. In practice, the reference shapes $\mathcal{Y}$ are derived from watertight, triangular meshes, \eg, from ShapeNet \citep{Chang2015ARXIV} or ModelNet \citep{Wu2015CVPR}.
+
+\subsection{Shape Prior}
+\label{subsec:method-prior}
+
+\boldparagraph{Variational Auto-Encoder (\VAE)}
+%
+We propose to use the provided reference shapes $\mathcal{Y}$ to learn a model of possible 3D shapes over a low-dimensional latent space $\mathcal{Z} = \mathbb{R}^Q$, \ie,  $Q \ll R$. The prior model is learned using a \VAE where the joint distribution $p(y, z)$ decomposes into $p(y, z) = p(y | z)p(z)$ with $p(z)$ being a unit Gaussian, \ie, $p(z) = \mathcal{N}(z;0, I_Q)$ and $I_Q \in \mathbb{R}^{R \times R}$ being the identity matrix. Sampling from the model is then performed by choosing $z \sim p(z)$ and subsequently sampling $y \sim p(y | z)$. For training the generative model, we approximate the posterior $q(z | y) \approx p(z | y)$. The so-called recognition model $q(z | y)$ takes the form
+%
+\begin{align}
+q(z | y) &= \mathcal{N}(z; \mu(y), \text{diag}(\sigma^2(y)))\label{eq:encoder-decoder}
+\end{align}
+%
+where $\mu(y), \sigma^2(y) \in \mathbb{R}^Q$ are predicted using the encoder neural network. The generative model decomposes over voxels $y_i$; the corresponding probabilities $p(y_i | z)$ are either represented using Bernoulli distributions (for occupancy grids) or Gaussian distributions (for SDFs):
+%
+\begin{align}
+    \begin{split}
+        p(y_i | z) &= \text{Ber}(y_i ; \theta_i(z))\quad\text{or}\\
+        p(y_i | z) &= \mathcal{N}(y_i ; \mu_i(z), \sigma^2).\label{eq:decoder}
+    \end{split}
+\end{align}
+%
+In both cases, the parameters, \ie, $\theta_i(z)$ or $\mu_i(z)$, are predicted using the decoder neural network. For SDFs, we explicitly neglect the variance (\ie, $\sigma^2$ is constant) as it merely scales the training objective (see below) and simplifies shape inference later on (see \secref{subsec:method-inference}).
+
+In the framework of variational inference, the parameters of the encoder and the decoder are found by maximizing the likelihood $p(y)$. In practice, the likelihood is often intractable. Instead, the evidence lower bound is maximized (see \citep{Kingma2014ICLR,Blei2016ARXIV}), resulting in the following loss to be minimized:
+%
+\begin{align}
+\mathcal{L}_{\text{VAE}}(w) = - \mathbb{E}_{q(z |y)}[\ln p(y|z)] + \text{KL}(q(z | y)| p(z)).
+\end{align}
+%
+where $w$ are the weights of the encoder and decoder, hidden in the distributions $q(z|y)$ and $p(y|z)$ according to \eqnref{eq:encoder-decoder} and \eqref{eq:decoder}. The Kullback-Leibler divergence $\text{KL}$ can be computed analytically and the negative log-likelihood $-\ln p(y|z)$ corresponds to a binary cross-entropy error for occupancy grids or a scaled sum-of-squared error for SDFs. The loss $\mathcal{L}_{\text{VAE}}$ is minimized using stochastic gradient descent (SGD) by approximating the expectation
+%
+\begin{align}
+- \mathbb{E}_{q(z |y)}[\ln p(y|z)] \approx - \sum_{l = 1}^L \ln p(y | z^{(l)})
+\end{align}
+%
+and using the so-called reparameterization trick, \ie, $z^{(l)} = \mu(y) + \epsilon^{(l)} \sigma(y)$ with $\epsilon^{(l)} \sim \mathcal{N}(\epsilon; 0, I_Q)$, to make $\mathcal{L}_{\text{VAE}}$ differentiable. In practice, $L = 1$ is usually sufficient. We refer to \citep{Kingma2014ICLR} for further details.
+
+\boldparagraph{Denoising \VAE (\DVAE)}
+%
+\cite{Im2017AAAI} introduced a denoising variant of the \VAE. More specifically, a corruption process $y' \sim p(y' | y)$ is considered and the corresponding evidence lower bound results in the following loss:
+%
+\begin{align}
+    \begin{split}
+        \mathcal{L}_{\text{DVAE}}(w) =& - \mathbb{E}_{q(z | y')}[\ln p(y|z)]\\
+        &+ \text{KL}(q(z | y')| p(z)).
+    \end{split}
+\end{align}
+%
+In practice, the corruption process $p(y' | y)$ may, for example, be modeled using Bernoulli or Gaussian noise (\eg, for occupancy grids and SDFs).
+%Data augmentation -- as discussed in \secref{sec:training} -- fits this formulation as well.
+Im \etal argue that this additional process allows the recognition model $q(z | y')$ to be more expressive, \eg, cover multi-modal distributions, and we found \DVAEs to learn more robust latent spaces. We refer the reader to \citep{Im2017AAAI} for further details.
+
+\subsection{Shape Inference}
+\label{subsec:method-inference}
+
+\begin{figure}[t]
+    \vspace*{-\figskipabove px}
+    \centering
+    \hfill
+    \begin{subfigure}[t]{0.25\linewidth}
+        \vspace{0px}
+        \centering
+        \includegraphics[height=4.5cm]{fig_method_sdf_2}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.6\linewidth}
+        \vspace{3px}
+        \centering
+        \hspace*{-12px}
+        \includegraphics[height=4.5cm]{fig_method_sdf_1}
+    \end{subfigure}
+    \hfill
+    \vspace*{-8px}
+    \caption{{{\bf Left: Problem with SDF Observations.} Illustration of a ray ({\color{red}red line}) correctly hitting a surface ({\color{blue}blue line}) causing the (signed) distance values and occupancy values computed for voxels along the ray to be correct (\cf (a)). A noisy ray, however, causes all voxels along the ray to be assigned incorrect distance values (marked {\colorbox{red!25}{red}}) \wrt to the true surface ({\color{blue}blue line}) because the ray ends far behind the actual surface (\cf (b)). When using occupancy only, in contrast, only the voxels behind the surface are assigned invalid occupancy states (marked {\colorbox{red!25}{red}}); the remaining voxels are labeled correctly (marked {\colorbox{green!25}{green}}; \cf (c)).
+            {\bf Right: Proposed Gaussian-to-Bernoulli Transformation.} For $p(y_i) := p(y_i | z) = \mathcal{N}(y_i;\mu_i(z), \sigma^2)$ ({\color{blue}blue}), we illustrate the transformation discussed in \secref{subsec:method-inference} allowing to use the binary observations $x_i$ (for $x_i \neq \uk$) to supervise the SDF predictions. This is achieved by transforming the predicted Gaussian distribution to a Bernoulli distribution with occupancy probability $\theta_i(\mu_i(z)) = p(y_i \leq 0)$ ({\color{blue}blue area}).}}
+    \label{fig:method-sdf}
+    \vspace*{-\figskipbelow px}
+\end{figure}
+
+After learning the shape prior $p(y, z) = p(y| z) p(z)$, shape completion can be formulated as a maximum likelihood (\ML) problem over the lower-dimensional latent space $\mathcal{Z} = \mathbb{R}^Q$. The corresponding negative log-likelihood $-\ln p(y, z)$ to be minimized can be written as
+%
+\begin{align}
+\mathcal{L}_{\text{ML}}(z) &= - \sum_{x_i \neq \uk} \ln p(y_i = x_i | z) - \ln p(z).\label{eq:ml}
+\end{align}
+%
+As the prior $p(z)$ is Gaussian, the negative log-probability $- \ln p(z)$ is proportional to $\|z\|_2^2$ and ensures that high-probability shapes are favored. As before, the generative model $p(y | z)$ decomposes over voxels; here, we can only consider actually observed voxels $x_i \neq \uk$. Instead of solving \eqnref{eq:ml} for each observation $x \in \mathcal{X}$ independently, however, we follow the idea of amortized inference \citep{Gersham2014COGSCI} and train an encoder $z(x;w)$ to \emph{learn} \ML. To this end, we keep the generative model $p(y|z)$ fixed and train the weights $w$ of the encoder $z(x;w)$ using the \ML objective as loss:
+%
+\begin{align}
+    \begin{split}
+        \mathcal{L}_{\text{dAML}}(w) =& - \sum _{x_i \neq \uk} \ln p(y_i = x_i | z(x; w))\\
+        &- \lambda \ln p(z(x; w)).\label{eq:aml}
+    \end{split}
+\end{align}
+%
+where $\lambda$ controls the importance of the shape prior. The exact form of the probabilities $p(y_i = x_i | z)$ depends on the used shape representation. For occupancy grids, this term results in a cross-entropy error (as both $y_i$ and $x_i$ are, for $x_i \neq \uk$, binary). For SDFs, however, the term is not well-defined as $p(y_i | z)$ is modeled with a continuous Gaussian distribution, while the observations $x_i$ are binary. As solution, we could compute (signed) distance values along the rays corresponding to observed points (\eg, following \citep{Steinbrucker2013ICCV}) in order to obtain continuous observations $x_i \in\mathbb{R}$ for $x_i \neq \uk$. However, as illustrated in \figref{fig:method-sdf}, noisy observations cause the distance values along the whole ray to be invalid. This can partly be avoided when relying on occupancy to represent the observations; in this case, free space (\cf \figref{fig:method-problem}) observations are partly correct even though observed points may lie within the corresponding shapes.
+
+For making SDFs tractable (\ie, to predict sub-voxel accurate, visually smooth and appealing shapes, see \secref{sec:experiments}), we propose to define $p(y_i = x_i | z)$ through a simple transformation. In particular, as $p(y_i | z)$ is modeled using a Gaussian distribution $\mathcal{N}(y_i ; \mu_i(z), \sigma^2)$ where $\mu_i(z)$ is predicted using the fixed decoder ($\sigma^2$ is constant), and $x_i$ is binary (for $x_i \neq \uk$), we introduce a mapping $\theta_i(\mu_i(z))$ transforming the predicted Gaussian distribution to a Bernoulli distribution with occupancy probability $\theta_i(\mu_i(z))$:
+%
+\begin{align}
+p(y_i = x_i | z) = \text{Ber}(y_i = x_i; \theta_i(\mu_i(z)))
+\end{align}
+%
+As occupied voxels have a negative sign in the SDF, we can derive the occupancy probability $\theta_i(\mu_i(z))$ as the probability of a negative distance:
+%
+\begin{align}
+\theta_i(\mu_i(z)) &= \mathcal{N}(y_i \leq 0; \mu_i(z), \sigma^2)\\
+%&= \int_{y_i'}^0 \mathcal{N}(y_i'; \mu_i(z), \sigma^2) dy_i'\\
+&= \frac{1}{2} \left(1 + \text{erf}\left(\frac{- \mu_i(z)}{\sigma \sqrt{\pi}}\right)\right).\label{eq:sdf}
+\end{align}
+%
+Here, $\text{erf}$ is the error function which, in practice, can be approximated following~\citep{Abramowitz1974}. \eqnref{eq:sdf} is illustrated in \figref{fig:method-sdf} where the occupancy probability $\theta_i(\mu_i(z))$ is computed as the area under the Gaussian bell curve for $y_i \leq 0$. This per-voxel transformation can easily be implemented as non-linear layer and its derivative \wrt $\mu_i(z)$
+is, by construction, a Gaussian.
+
+\subsection{Practical Considerations}
+
+\boldparagraph{Encouraging Variety}
+%
+So far, our \AML formulation assumes a deterministic encoder $z(x,w)$ which predicts, given the observation $x$, a single code $z$ corresponding to a completed shape. A closer look at \eqnref{eq:aml}, however, reveals an unwanted problem: the data term scales with the number of observations, \ie, $|\{x_i \neq \uk\}|$, while the regularization term stays constant -- with less observations, the regularizer gains in importance leading to limited variety in the predicted shapes because $z(x; w)$ tends towards zero.
+
+In order to encourage variety, we draw inspiration from the \VAE shape prior. Specifically, we use a probabilistic recognition model
+%
+\begin{align}
+q(z|x) = \mathcal{N}(z; \mu(x), \text{diag}(\sigma^2(x)))
+\end{align}
+%
+(\eg, see \eqnref{eq:encoder-decoder}) and replace the negative log-likelihood $-\ln p(z)$ with the corresponding Kullback-Leibler divergence $\text{KL}(q(z|x)|p(z))$ with $p(z) = \mathcal{N}(z; 0, I_Q)$. Intuitively, this makes sure that the encoder's predictions ``cover'' the prior distribution -- thereby enforcing variety. Mathematically, the resulting loss, \ie, 
+%
+\begin{align}
+\begin{split}
+    \mathcal{L}_{\text{AML}}(w) =& - \sum _{x_i \neq \uk} \ln p(y_i = x_i | z)\\
+    &+ \lambda \text{KL}(q(z|x)p(z)),\label{eq:daml}
+\end{split}
+\end{align}
+%
+can be interpreted as the result of maximizing the evidence lower bound of a model with observation process $p(x | y)$ (analogously to the corruption process $p(y'|y)$ for \DVAEs in \citep{Im2017AAAI} and \secref{subsec:method-prior}). As with \DVAEs, we replace sampling with the predicted mean $\mu(z)$ during testing. In practice, we find that \eqnref{eq:daml} improves visual quality of the completed shapes. We compare this \AML model to its deterministic variant \dAML in \secref{sec:experiments}.
+
+\boldparagraph{Handling Noise}
+%
+Another problem of our \AML formulation concerns noise. On KITTI, for example, specular or transparent surfaces cause invalid observations -- laser rays traversing through these surfaces cause observations to lie within shapes or not get reflected. However, our \AML framework assumes deterministic, \ie, trustworthy, observations. Therefore, we introduce per-voxel weights $\kappa_i$ computed using the reference shapes $\mathcal{Y} = \{y_m\}_{m=1}^M$:
+%
+\begin{align}
+\kappa_i = 1 - \left(\frac{1}{M} \sum_{m = 1}^M y_{m,i}\right) \in [0,1]
+\end{align}
+%
+where $y_{m,i} = 1$ if and only if the corresponding voxel is occupied. Applied to observations $x_i = 0$, these are trusted less if they are unlikely under the shape prior. Note that for point observations, \ie, $x_i = 1$, this is not necessary as we explicitly consider ``filled'' shapes (see \secref{sec:data}). This can also be interpreted as imposing an additional prior on the predicted shapes. In addition, we use a corruption process $p(x' | x)$ consisting of Bernoulli and Gaussian noise during training (analogously to the \DVAE shape prior).

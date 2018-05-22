@@ -1,0 +1,53 @@
+\subsection{Experimental Evaluation}
+\label{sec:experiments}
+
+Quantitative results are summarized in \tabref{tab:results-shapenet} (ShapeNet and KITTI) and \ref{tab:results-modelnet} (ModelNet). Qualitative results for the shape prior are shown in \figref{fig:results-shape-prior} and \ref{fig:results-latent-space}; shape completion results are shown in \figref{fig:results-synthetic} (ShapeNet and ModelNet) and \ref{fig:results-real} (KITTI and \Kinect).
+
+\input{fig_results_latent_space}
+\input{tab_results_shapenet_kitti}
+\input{fig_results_synthetic}
+\input{tab_results_modelnet}
+\input{fig_results_synthetic_extra}
+\input{fig_results_multi_category}
+\input{fig_results_real}
+\input{fig_results_failures}
+
+\boldparagraph{Latent Space Dimensionality}
+%
+Regarding our \DVAE shape prior, we found the dimensionality $Q$ to be of crucial importance as it defines the trade-off between reconstruction accuracy and random sample quality (\ie, the quality of the generative model). A higher-dimension-al latent space usually results in higher-quality reconstructions but also imposes the difficulty of randomly generating meaningful shapes. Across all datasets, we found $Q = 10$ to be suitable -- which is significantly smaller compared to related work: $35$ in \citep{Liu2017ARXIV}, $6912$ in \citep{Sharma2016ARXIV}, $200$ for \citep{Wu2016NIPS,Smith2017ARXIV} or $64$ in \citep{Girdhar2016ECCV}. Still, we are able to obtain visually appealing results. Finally, in \figref{fig:results-shape-prior} we show qualitative results, illustrating good reconstruction performance and reasonable random samples across resolutions.
+
+\figref{fig:results-latent-space} shows a t-SNE \citep{Maaten2008JMLR} visualization as well as a projection of the $Q = 10$ dimensional latent space, color coding the $10$ object categories of ModelNet10. The \DVAE clusters the object categories within the support region of the unit Gaussian. In the t-SNE visualization, we additionally see ambiguities arising in ModelNet10, \eg, night stands and dressers often look indistinguishable while monitors are very dissimilar to all other categories. Overall, these findings support our decision to use a \DVAE with $Q=10$ as shape prior.
+
+\boldparagraph{Ablation Study}
+%
+In \tabref{tab:results-shapenet}, we show quantitative results of our model on \clean and \noisy. First, we report the reconstruction quality of the \DVAE shape prior as reference. Then, we consider the \DVAE shape prior (\BL), and its mean prediction (\M) as simple baselines. The poor performance of both illustrates the difficulty of the benchmark. For \AML, we also consider its deterministic variant, \dAML (see \secref{sec:method}). Quantitatively, there is essentially no difference; however, \figref{fig:results-shape-prior} demonstrates that \AML is able to predict more detailed shapes. We also found that using both occupancy and SDFs is necessary to obtain good performance -- as is using both point observations and free space.
+
+Considering \figref{fig:results-latent-space}, we additionally demonstrate that the embedding learned by \AML, \ie, the embedding of incomplete observations within the latent shape space, is able to associate observations with corresponding shapes even under weak supervision. In particular, we show a t-SNE visualization and a projection of the latent space for \AML trained on \clean. We color-code $10$ randomly chosen ground truth shapes, resulting in $100$ observations ($10$ views per shape). \AML is usually able to embed observations near the corresponding ground truth shapes, without explicit supervision (\eg, for violet, pink, blue or teal, the observations -- points -- are close to the corresponding ground truth shapes -- ``x''). Additionally, \AML also matches the unit Gaussian prior distribution reasonably well.
+
+\boldparagraph{Comparison to Baselines on Synthetic Data}
+%
+For ShapeNet, \tabref{tab:results-shapenet} demonstrates that \AML outperforms data-driven approaches such as \Engelmann, \ICP and \ML and is able to compete with fully-supervised approaches, \Dai and \Sup, while using only $8\%$ or less supervision. We also note that~\AML outperforms \ML, illustrating that amortized inference is beneficial. Furthermore, \Dai outperforms \Sup, illustrating the advantage of propagating low-level information (through skip connections) without bottleneck. Most importantly, the performance gap between \AML and \Dai is rather small considering the difference in supervision (more than $92\%$) and on \noisy, the drop in performance for \Dai and \Sup is larger than for \AML suggesting that \AML handles noise and sparsity more robustly. \figref{fig:results-synthetic} shows that these conclusions also apply visually where \AML performs en par with \Dai.
+
+For ModelNet, in \tabref{tab:results-modelnet}, we mostly focus on occupancy grids (as the derived SDFs are approximate, \cf \secref{sec:data}) and show that chairs, desks or tables are more difficult. However, \AML is still able to predict high-quality shapes, outperforming data-driven approaches. Additionally, in comparison to ShapeNet, the gap between \AML and fully-supervised approaches (\Dai and \Sup) is surprisingly small -- not reflecting the difference in supervision. This means that even under full supervision, these object categories are difficult to complete. In terms of accuracy (\Acc) and completeness (\Compl), \eg, for chairs, \AML outperforms \ICP and \ML; \Dai and \Sup, on the other hand, outperform \AML. Still, considering \figref{fig:results-synthetic}, \AML predicts visually appealing meshes although the reference shape SDFs on ModelNet are merely approximate. Qualitatively, \AML also outperforms its data-driven rivals; only \Dai predicts shapes slightly closer to the ground truth.
+
+\boldparagraph{Multiple Views and Higher Resolutions}
+%
+In \tabref{tab:results-shapenet}, we consider multiple, $k \in \{2,3,5\}$, randomly fused observations (from the $10$ views per shape). Generally, additional observations are beneficial (also \cf \figref{fig:results-synthetic-extra}); however, fully-supervised approaches such as \Dai benefit more significantly than \AML. Intuitively, especially on \noisy, $k = 5$ noisy observations seem to impose contradictory constraints that cannot be resolved under weak supervision. We also show that higher resolution allows both \AML and \Dai to predict more detailed shapes, see \figref{fig:results-synthetic-extra}; for \AML this is significant as, \eg, on \noisy, the level of supervision reduces to less than $1\%$.
+
+\boldparagraph{Multiple Object Categories}
+%
+We also investigate the category-agnostic case, considering all ten ModelNet10 object categories; here, we train a single \DVAE shape prior (as well as a single model for \Dai and \Sup) across all ten object categories. As can be seen in \tabref{tab:results-modelnet}, the gap between \AML and fully-supervised approaches, \Dai and \Sup, further shrinks; even fully-supervised methods have difficulties distinguishing object categories based on sparse observations. \figref{fig:results-synthetic-extra} shows that \AML is able to not only predict reasonable shapes, but also identify the correct object category. In contrast to \Dai, which predicts slightly more detailed shapes, this is significant as \AML does not have access to object category information during training.
+
+\boldparagraph{Comparison on Real Data}
+%
+On KITTI, considering \figref{fig:results-real}, we illustrate that \AML consistently predicts detailed shapes regardless of the noise and sparsity in the inputs. Our qualitative results suggest that \AML is able to predict more detailed shapes compared to \Dai and \Engelmann; additionally, \Engelmann is distracted by sparse and noisy observations. Quantitatively, instead, \Dai and \Sup outperform \AML. However, this is mainly due to two factors: first, the ground truth collected on KITTI does rarely cover the full car; and second, we put significant effort into faithfully modeling KITTI's noise statistics in \noisy, allowing \Dai and \Sup to generalize very well. The latter effort, especially, can be avoided by using our weakly-supervised approach, \AML.
+
+On \Kinect, also considering \figref{fig:results-real}, only $30$ observations are available for training. It can be seen that \AML predicts reasonable shapes for tables. We find it interesting that \AML is able to generalize from only $30$ training examples. In this sense, \AML functions similar to \ML, in that the objective is trained to overfit to few samples. This, however, cannot work in all cases, as demonstrated by the chairs where \AML tries to predict a suitable chair, but does not fit the observations as well. Another problem witnessed on \Kinect, is that the shape prior training samples need to be aligned to the observations (with respect to the viewing angles). For the chairs, we were not able to guess the viewing trajectory correctly (\cf \citep{Yang2018ARXIVb}).
+
+\boldparagraph{Failure Cases}
+%
+\AML and \Dai often face similar problems, as illustrated in \figref{fig:results-failures}, suggesting that these problems are inherent to the used shape representations or the learning approach independent of the level of supervision. For example, both \AML and \Dai have problems with fine, thin structures that are hard to reconstruct properly at any resolution. Furthermore, identifying the correct object category on ModelNet10 from sparse observations is difficult for both \AML and \Sup. Finally, \AML additionally has difficulties with exotic objects that are not well represented in the latent shape space as, \eg, designed chairs.
+
+\boldparagraph{Runtime}
+%
+{At low resolution, \AML as well as the fully-supervised approaches \Dai and \Sup, are particular fast, requiring up to $2ms$ on a NVIDIA\texttrademark\xspace GeForce\textregistered\xspace GTX TITAN using Torch \citep{Collobert2011NIPSWORK}. Data-driven approaches (\eg, \Engelmann, \ICP and \ML), on the other hand, take considerably longer. \Engelmann, for instance requires $168ms$ on average for completing the shape of a sparse LIDAR observation from KITTI using an Intel\textregistered\xspace Xeon\textregistered\xspace E5-2690 @2.6Ghz and the multi-threaded Ceres solver \citep{AgarwalCeres}. \ICP and \ML take longest, requiring up to $38s$ and $75s$ (not taking into account the point sampling process for the shapes), respectively. Except for \Engelmann and \ICP, all approaches scale with the used resolution and the employed architecture.}

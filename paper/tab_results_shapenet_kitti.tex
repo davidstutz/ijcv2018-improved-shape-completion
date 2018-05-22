@@ -1,0 +1,58 @@
+\begin{table*}[t]
+    \vspace*{-\figskipabove px}
+    \centering
+    {\scriptsize
+        \begin{tabularx}{1\textwidth}{|@{  }l@{  }|@{  }X@{  }|@{  }c@{  }c@{  }c@{  }c@{  }|@{  }c@{  }c@{  }c@{  }c@{  }|@{  }c@{  }|}
+            \hline
+             \multicolumn{1}{|@{  }c@{  }|@{  }}{Supervision} & \multicolumn{1}{@{  }c@{  }|@{  }}{Method} & \multicolumn{4}{@{  }c@{  }|@{  }}{\clean} & \multicolumn{4}{@{  }c@{  }|@{  }}{\noisy} & \multicolumn{1}{c|}{KITTI}\\
+             \multicolumn{1}{|@{  }c@{  }|@{  }}{in \%} && \Abs {\tiny $\downarrow$} & \IoU {\tiny $\uparrow$} & \Acc [vx] {\tiny $\downarrow$} & \Compl [vx] {\tiny $\downarrow$} & \Abs {\tiny $\downarrow$} & \IoU {\tiny $\uparrow$} & \Acc [vx] {\tiny $\downarrow$} & \Compl [vx] {\tiny $\downarrow$} & \Compl [m] {\tiny $\downarrow$} \\
+            \hline\hline
+            \multicolumn{11}{|c|}{Low Resolution: $24 \times 54 \times 24$ voxels; * independent of resolution}\\
+            \hline\hline
+            {\color{darkgray}(shape prior)} & {\leavevmode\color{darkgray}\DVAE} & {\color{darkgray}0.019} & {\color{darkgray}0.885} & {\color{darkgray}0.283} & {\color{darkgray}0.527} & \multicolumn{5}{@{  }c@{  }|}{{\color{darkgray}(same shape prior as on \clean)}}\\
+            \hline\hline
+            \multirow{2}{*}{$\hphantom{<}100$} & \cite{Dai2017CVPRa} (\Dai) & {\bf\color{rred} 0.021} & {\bf\color{rred} 0.872} & {\bf\color{rred} 0.321} & {\bf\color{rred} 0.564} & {\bf\color{rred} 0.027} & {\bf\color{rred} 0.836} & {\bf\color{rred} 0.391} & {\bf\color{rred} 0.633} & 0.128\\
+            &\Sup & 0.026 & 0.841 & 0.409 & 0.607 & 0.028 & 0.833 & 0.407 & 0.637 & {\bf\color{rred} 0.091}\\
+            \hline
+            \multirow{10}{*}{$<7.7$} &\BL & 0.067 & 0.596 & 0.999 & 1.335 & 0.064 & 0.609 & 0.941 & 1.29 & \color{darkgray}--\\
+            &\M & 0.052 & 0.697 & 0.79 & 0.938 & 0.052 & 0.696 & 0.79 & 0.938 & \color{darkgray}--\\
+            &\ML & 0.04 & 0.756 & 0.637 & 0.8 & 0.041 & 0.755 & 0.625 & 0.829 & \color{darkgray}(too slow)\\
+            & *\cite{Gupta2015CVPR} (\ICP) & \multicolumn{2}{@{  }c@{  }}{\color{darkgray}(mesh only)} & 0.534 & {\bf\color{rgreen} 0.503} & \multicolumn{2}{@{  }c@{  }}{\color{darkgray}(mesh only)} & 7.551 & 6.372 & \color{darkgray}(too slow)\\
+            & *\cite{Engelmann2016GCPR} (\Engelmann) & \multicolumn{2}{@{  }c@{  }}{\color{darkgray}(mesh only)} & 1.235 & 1.237 & \multicolumn{2}{@{  }c@{  }}{\color{darkgray}(mesh only)} & 1.974 & 1.312 & 0.13\\ % 0.545016
+            &\dAML & {\bf\color{rgreen} 0.034} & {\bf\color{rgreen} 0.784} & {\bf\color{rgreen} 0.532} & 0.741 & {\bf\color{rgreen} 0.036} & {\bf\color{rgreen} 0.772} & {\bf\color{rgreen} 0.557} & {\bf\color{rgreen} 0.76} & \color{darkgray}(see \AML)\\
+            &\AML & {\bf\color{rgreen} 0.034} & 0.779 & 0.549 & 0.753 & {\bf\color{rgreen} 0.036} & 0.771 & 0.57 & 0.761 & {\bf\color{rgreen} 0.12}\\
+            \hline\hline
+            \multicolumn{11}{|c|}{Low Resolution: $24 \times 54 \times 24$ voxels; Multiple, $k > 1$ Fused Views}\\
+            \hline\hline
+            \multirow{2}{*}{$\hphantom{<}100$} & \cite{Dai2017CVPRa} (\Dai), $k = 5$ & \bf\color{rred}0.012 & \bf\color{rred}0.924 & \bf\color{rred}0.214 & \bf\color{rred}0.436 & \bf\color{rred}0.018 & \bf\color{rred}0.887 & \bf\color{rred}0.278 & \bf\color{rred}0.491 &\multirow{2}{*}{\color{darkgray}n/a}\\
+            &\Sup, $k = 5$ & 0.022 & 0.866 & 0.336 & 0.566 & 0.024 & 0.86 & 0.331 & 0.573 &\\
+            \hline
+            $<16$ & \AML, $k = 2$ & 0.032 & 0.794 & 0.489 & 0.695 & 0.034 & 0.79 & 0.52 & 0.725 & \multirow{3}{*}{\color{darkgray}n/a}\\
+            $<24$ & \AML, $k = 3$ & {\bf\color{rgreen} 0.031} & {\bf\color{rgreen} 0.809} & {\bf\color{rgreen} 0.471} & {\bf\color{rgreen} 0.667} & {\bf\color{rgreen} 0.031} & {\bf\color{rgreen} 0.81} & {\bf\color{rgreen} 0.493} & {\bf\color{rgreen} 0.67} &\\
+            $<40$ & \AML, $k = 5$ & {\bf\color{rgreen} 0.031} & 0.804 & 0.502 & 0.686 & 0.035 & 0.799 & 0.523 & 0.7 &\\
+            \hline\hline
+            \multicolumn{11}{|c|}{Medium Resolution: $32 \times 72 \times 32$ voxels}\\
+            \hline\hline
+            {\color{darkgray}(shape prior)} & {\leavevmode\color{darkgray}\DVAE} & {\color{darkgray}0.019} & {\color{darkgray}0.877} & {\color{darkgray}0.24} & {\color{darkgray}0.47} & \multicolumn{5}{@{  }c@{  }|}{{\color{darkgray}(same shape prior as on \clean)}}\\
+            \hline\hline 
+            \multirow{2}{*}{$\hphantom{<}100$} & \cite{Dai2017CVPRa} (\Dai) & {\bf\color{rred} 0.02} & {\bf\color{rred} 0.869} & {\bf\color{rred} 0.399} & {\bf\color{rred} 0.674} & {\bf\color{rred} 0.026} & {\bf\color{rred} 0.83} & {\bf\color{rred} 0.51} & {\bf\color{rred} 0.767} & {\bf\color{rred} 0.074}\\
+            &\Sup & 0.027 & 0.834 & 0.498 & 0.789 & 0.029 & 0.815 & 0.571 & 0.843 & 0.09\\
+            \hline
+            $\leq6.1$ & \AML & {\bf\color{rgreen} 0.031} & {\bf\color{rgreen} 0.788} & {\bf\color{rgreen} 0.415} & {\bf\color{rgreen} 0.584} & {\bf\color{rgreen} 0.036} & {\bf\color{rgreen} 0.766} & {\bf\color{rgreen} 0.721} & {\bf\color{rgreen} 0.953} & {\bf\color{rgreen} 0.083}\\
+            \hline\hline
+            \multicolumn{11}{|c|}{High Resolution: $48 \times 108 \times 48$ voxels}\\
+            \hline\hline
+            {\color{darkgray}(shape prior)} & {\leavevmode\color{darkgray}\DVAE} & {\color{darkgray}0.018} & \color{darkgray}0.87 & {\color{darkgray}0.272} & {\color{darkgray}0.434} & \multicolumn{5}{@{  }c@{  }|}{{\color{darkgray}(same shape prior as on \clean)}}\\
+            \hline\hline
+            \multirow{2}{*}{$\hphantom{<}100$} & \Dai & {\bf\color{rred} 0.017} & {\bf\color{rred} 0.88} & {\bf\color{rred} 0.517} & {\bf\color{rred} 0.827} & 0.054 & 0.664 & 1.559 & 2.067 & {\bf\color{rred} 0.066}\\
+            &\Sup & 0.023 & 0.843 & 0.677 & 1.032 & {\bf\color{rred} 0.052} & {\bf\color{rred} 0.674} & {\bf\color{rred} 1.52} & {\bf\color{rred} 1.981} & 0.091\\
+            \hline
+            $<3.5$ & \AML & {\bf\color{rgreen} 0.028} & {\bf\color{rgreen} 0.796} & {\bf\color{rgreen} 0.433} & {\bf\color{rgreen} 0.579} & {\bf\color{rgreen} 0.045} & {\bf\color{rgreen} 0.659} & {\bf\color{rgreen} 1.4} & {\bf\color{rgreen} 1.957} & {\bf\color{rgreen} 0.078}\\
+            \hline
+        \end{tabularx}
+    }
+    \vspace*{-\figskipcaption px}
+    \caption{{\bf Quantitative Results on ShapeNet and KITTI.} We consider Hamming distance (\Abs) and intersection over union (\IoU) for occupancy grids as well as accuracy (\Acc) and completeness (\Compl) for meshes on \clean, \noisy and KITTI. For \Abs, \Acc and \Compl, lower is better; for \IoU, higher is better. The unit of \Acc and \Compl is voxels (voxel length at $24 \ntimes 54 \ntimes 48$ voxels) or meters. Note that the \DVAE shape prior (in {\color{darkgray}gray}) is only reported as reference (\ie, bound on (d)\AML). We indicate the level of supervision in percentage, relative to the corresponding resolution and mark the best results under full supervision in {\color{rred}\bf red} and under weak supervision in {\color{rgreen}\bf green}.}
+    \label{tab:results-shapenet}
+    \vspace*{-\figskipbelow px}
+\end{table*}

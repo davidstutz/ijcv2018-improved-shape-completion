@@ -1,0 +1,103 @@
+%%%%%%%%%%%%%%%%%%%%%%% file template.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is a general template file for the LaTeX package SVJour3
+% for Springer journals.          Springer Heidelberg 2010/09/16
+%
+% Copy it to a new file with a new name and use it as the basis
+% for your article. Delete % signs as needed.
+%
+% This template includes a few options for different layouts and
+% content for various journals. Please consult a previous issue of
+% your journal as needed.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\RequirePackage{fix-cm}
+%
+%\documentclass{svjour3}                     % onecolumn (standard format)
+%\documentclass[smallcondensed]{svjour3}     % onecolumn (ditto)
+%\documentclass[smallextended]{svjour3}       % onecolumn (second format)
+\documentclass[twocolumn]{svjour3}          % twocolumn
+%
+\smartqed  % flush right qed marks, e.g. at end of proof
+%
+\usepackage{graphicx}
+%
+% \usepackage{mathptmx}      % use Times fonts if available on your TeX system
+%
+% insert here the call for the packages your document requires
+%\usepackage{latexsym}
+% etc.
+%
+% please place your own definitions here and don't use \def but
+% \newcommand{}{}
+%
+% Insert the name of "your journal" with
+% \journalname{myjournal}
+%
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\captionsetup[sub]{font=footnotesize}
+\usepackage{natbib}
+\setcitestyle{authoryear,open={(},close={)}}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{mdframed}
+\usepackage{hhline}
+
+\input{commands}
+\begin{document}
+\setlength{\abovedisplayskip}{8pt plus 0pt minus 2pt} % 10 + 2 - 5
+\setlength{\belowdisplayskip}{8pt plus 0pt minus 2pt} % 10 + 2 - 5
+
+\renewcommand{\floatpagefraction}{2}
+
+\title{Learning 3D Shape Completion under Weak Supervision}
+\author{David Stutz \and Andreas Geiger}
+
+\institute{David Stutz \at
+  Max Planck Institute for Informatics\\
+  Campus E1 4, 66123 Saarbr\"{u}cken, Germany\\
+  Tel.: +49 681 9325 2021\\
+  \email{david.stutz@mpi-inf.mpg.de}\\
+  \and
+  Andreas Geiger \at
+  Max Planck Institute for Intelligent Systems and University of T\"{u}bingen\\
+  Max-Planck-Ring 4, 72076 T\"{u}bingen, Germany
+}
+
+\date{Received: date / Accepted: date}
+% The correct dates will be entered by the editor
+
+\maketitle
+
+\input{sec_abstract}
+\input{sec_intro}
+\input{sec_related}
+\input{sec_method}
+\input{sec_data}
+\input{sec_evaluation}
+\input{sec_training}
+\input{sec_baselines}
+\input{sec_results}
+\input{sec_conclusion}
+
+{\small
+    % BibTeX users please use one of
+    \bibliographystyle{spbasic}      % basic style, author-year citations
+    %\bibliographystyle{spmpsci}      % mathematics and physical sciences
+    %\bibliographystyle{spphys}       % APS-like style for physics
+    \bibliography{bibliography_long,bibliography,bibliography_custom}
+}
+
+\end{document}
+

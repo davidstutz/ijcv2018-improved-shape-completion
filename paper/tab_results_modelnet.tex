@@ -1,0 +1,45 @@
+\begin{table*}[t]
+    \vspace*{-\figskipabove px}
+    \centering
+    {\scriptsize
+        
+    \begin{tabularx}{1\linewidth}{|@{  }l@{  }|@{  }X@{  }|@{  }c@{  }c@{  }|@{  }c@{  }c@{  }c@{  }c@{  }|@{  }c@{  }c@{  }|@{  }c@{  }c@{  }|c@{  }c@{  }|}
+        \hline
+        Supervision & Method & \multicolumn{2}{@{  }c@{  }|@{  }}{bathtub} & \multicolumn{4}{@{  }c@{  }|@{  }}{chair} & \multicolumn{2}{@{  }c@{  }|@{  }}{desk} & \multicolumn{2}{@{  }c@{  }|}{table} & \multicolumn{2}{@{  }c@{  }|}{ModelNet10}\\
+        \multicolumn{1}{|@{  }c@{  }|@{  }}{in \%} && \Abs{\tiny $\downarrow$}& \IoU{\tiny $\uparrow$} & \Abs{\tiny $\downarrow$} & \IoU{\tiny $\uparrow$}  & \Acc [vx]{\tiny $\downarrow$} & \Compl [vx]{\tiny $\downarrow$} & \Abs{\tiny $\downarrow$}& \IoU{\tiny $\uparrow$} & \Abs{\tiny $\downarrow$} & \IoU{\tiny $\uparrow$} & \Abs{\tiny $\downarrow$} & \IoU{\tiny $\uparrow$}\\
+        \hline\hline
+        \multicolumn{14}{|c|}{Low Resolution: $32^3$ voxels; * independent of resolution}\\
+        \hline\hline
+        \color{darkgray}(shape prior) & \leavevmode\color{darkgray}\DVAE & \color{darkgray}0.015 & \color{darkgray}0.699 & \color{darkgray}0.025 & \color{darkgray}0.517 & \color{darkgray}0.884 & \color{darkgray}0.72 & \color{darkgray}0.028 & \color{darkgray}0.555 & \color{darkgray}011 & \color{darkgray}0.608 & \color{darkgray}0.023 & \color{darkgray}0.714\\
+        \hline\hline
+        \multirow{2}{*}{$\hphantom{<}100$} & \cite{Dai2017CVPRa} (\Dai) & \bf\color{rred}0.022 & 0.59 & \bf\color{rred}0.019 & \bf\color{rred}0.61 & \bf\color{rred}0.663 & \bf\color{rred}0.671 & \bf\color{rred}0.027 & \bf\color{rred}0.568 & \bf\color{rred}0.011 & \bf\color{rred}0.648 & \bf\color{rred}0.03 & \bf\color{rred}0.646\\
+        & \Sup & 0.023 & \bf\color{rred}0.618 & 0.03 & 0.478 & 0.873 & 0.813 & 0.036 & 0.458 & 0.017 & 0.497 & 0.038 & 0.589\\
+        \hline
+        \multirow{3}{*}{$<10$} & * \cite{Gupta2015CVPR} (\ICP) & \multicolumn{2}{@{  }c@{  }|@{  }}{\color{darkgray}(mesh only)} & \multicolumn{2}{@{  }c@{  }}{\color{darkgray}(mesh only)} & 1.483 & 0.89 & \multicolumn{2}{@{  }c@{  }|@{  }}{\color{darkgray}(mesh only)} & \multicolumn{2}{@{  }c@{  }|}{\color{darkgray}(mesh only)} & \multicolumn{2}{@{  }c@{  }|}{\color{darkgray}(mesh only)}\\
+        & \ML & 0.028 & \bf\color{rgreen}0.503 & \bf\color{rgreen}0.033 & \bf\color{rgreen}0.414 & 1.489 & 1.065 & 0.048 & 0.323 & 0.029 & 0.318 &\multicolumn{2}{@{  }c@{  }|}{\color{darkgray} (too slow)}\\
+        & \AML & \bf\color{rgreen}0.026 & \bf\color{rgreen}0.503 & \bf\color{rgreen}0.033 & 0.373 & \bf\color{rgreen}1.088 & \bf\color{rgreen}0.785 & \bf\color{rgreen}0.041 & \bf\color{rgreen}0.389 & \bf\color{rgreen}0.018 & \bf\color{rgreen}0.423 & \bf\color{rgreen}0.04 & \bf\color{rgreen}0.509\\
+        \cline{13-14}
+        \hhline{============~~}
+        \multicolumn{12}{|@{  }c@{  }|}{Medium Resolution: $48^3$ voxels}&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \hhline{============~~}
+        \color{darkgray}(shape prior) & \leavevmode\color{darkgray}\DVAE & \color{darkgray}0.014 & \color{darkgray}0.671 & \color{darkgray}0.021 & \color{darkgray}0.491 & \color{darkgray}0.748 & \color{darkgray}0.697 & \color{darkgray}0.025 & \color{darkgray}0.525 & \color{darkgray}0.01 & \color{darkgray}0.548&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \hhline{============~~}
+        $\hphantom{<}100$ & \cite{Dai2017CVPRa} (\Dai) & \bf\color{rred}0.018 & \bf\color{rred}0.609 & \bf\color{rred}0.016 & \bf\color{rred}0.576 & \bf\color{rred}0.513 & \bf\color{rred}0.508 & \bf\color{rred}0.023 & \bf\color{rred}0.532 & \bf\color{rred}0.008 & \bf\color{rred}0.65&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \cline{1-12}
+        $<9$ & \AML & \bf\color{rgreen}0.024 & \bf\color{rgreen}0.459 & \bf\color{rgreen}0.029 & \bf\color{rgreen}0.347 & \bf\color{rgreen}1.025 & \bf\color{rgreen}0.805& \bf\color{rgreen}0.034 & \bf\color{rgreen}0.361 & \bf\color{rgreen}0.015 & \bf\color{rgreen}0.384&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \cline{1-12}\cline{1-12}
+        \multicolumn{12}{|@{  }c@{  }|}{High Resolution: $64^3$ voxels}&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \hhline{============~~}
+        \color{darkgray}(shape prior) & \leavevmode\color{darkgray}\DVAE & \color{darkgray}0.014 & \color{darkgray}0.644 & \color{darkgray}0.02 & \color{darkgray}0.474 & \color{darkgray}0.702 & \color{darkgray}0.705 & \color{darkgray}0.024 & \color{darkgray}0.506 & \color{darkgray}0.009 & \color{darkgray}0.548&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \cline{1-12}\cline{1-12}
+        $\hphantom{<}100$ & \cite{Dai2017CVPRa} (\Dai) & \bf\color{rred}0.018 & \bf\color{rred}0.54 & \bf\color{rred}0.016 & \bf\color{rred}0.548 & \bf\color{rred}0.47 & \bf\color{rred}0.53 & \bf\color{rred}0.021 & \bf\color{rred}0.525 & \bf\color{rred}0.007 & \bf\color{rred}0.673&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \cline{1-12}
+        $<9$ & \AML & \bf\color{rgreen}0.023 & \bf\color{rgreen}0.46 & \bf\color{rgreen}0.026 & \bf\color{rgreen}0.333 & \bf\color{rgreen}0.893 & \bf\color{rgreen}0.852 & \bf\color{rgreen}0.042 & \bf\color{rgreen}0.31 & \bf\color{rgreen}0.012 & \bf\color{rgreen}0.407&\multicolumn{2}{c}{\multirow{1}{*}{}}\\
+        \cline{1-12}
+    \end{tabularx}
+    }
+    \vspace*{-\figskipcaption px}
+    \caption{{\bf Quantitative Results on ModelNet.} Results for bathtubs, chairs, desks, tables and all ten categories combined (ModelNet10). As the ground truth SDFs are merely approximations (\cf \secref{sec:data}), we concentrate on Hamming distance (\Abs; lower is better) and intersection-over-union (\IoU; higher is better). Only for chairs, we report accuracy \Acc and completeness \Compl in voxels (voxel length at $32^3$ voxels). We also indicate the level of supervision. Again, we report the \DVAE shape prior as reference and color the best weakly-supervised approach using {\bf\color{rgreen}green} and the best fully-supervised approach in {\bf\color{rred}red}.    }
+    \label{tab:results-modelnet}
+    \vspace*{-\figskipbelow px}
+\end{table*}

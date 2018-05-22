@@ -1,0 +1,440 @@
+\newcommand{\cleana}{231} % 165 alternative
+\newcommand{\cleanb}{297}
+
+\newcommand{\noisya}{132}
+\newcommand{\noisyb}{66}
+
+\newcommand{\bathtuba}{792}
+\newcommand{\bathtubb}{330}
+
+\newcommand{\chaira}{528}
+\newcommand{\chairb}{990} % 0 924
+
+\newcommand{\deska}{264} % 198
+\newcommand{\deskb}{858}
+
+\newcommand{\tablea}{858}
+\newcommand{\tableb}{396} % 600 594
+\begin{figure*}[t]
+    \vspace*{-\figskipabove px}
+    \vspace*{2px}
+    \centering
+    {\scriptsize
+    \begin{subfigure}[t]{1\textwidth}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	Obs\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\cleana_points}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	\Dai\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_sup_3_2_res_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            \Dai\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_sup_3_3_res_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            \Engelmann\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_rw_results_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            \ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_ml_3_2_res_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            \ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_ml_3_3_res_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_vae_aml_3_2_res_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            \AML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_vae_aml_3_3_res_\cleana}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	GT\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\cleana_gt}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            GT\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\cleana_bin}
+        \end{subfigure}
+        \\[-2px]
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%Obs\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\cleanb_points}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Dai\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_sup_3_2_res_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Dai\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_sup_3_3_res_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Engelmann\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_rw_results_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_ml_3_2_res_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\ML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_ml_3_3_res_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_vae_aml_3_2_res_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_low_10_wide_vae_aml_3_3_res_\cleanb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%GT\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\cleanb_gt}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%GT\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_clean_low_\cleanb_bin}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%Obs\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_noisy_low_\noisya_points}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Dai\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_sup_3_2_res_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\Dai\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_sup_3_3_res_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Engelmann\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_rw_results_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_ml_3_2_res_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_ml_3_3_res_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_3_res_\noisya}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%GT\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_noisy_low_\noisya_gt}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %GT\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_noisy_low_\noisya_bin}
+        \end{subfigure}
+        \\[-2px]
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%Obs\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_noisy_low_\noisyb_points}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Dai\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_sup_3_2_res_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Dai\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_sup_3_3_res_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\Engelmann\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_rw_results_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_ml_3_2_res_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\ML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_ml_3_3_res_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%\AML\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_3_res_\noisyb}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%GT\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_noisy_low_\noisyb_gt}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+        	\vspace{0px}\centering
+        	%GT\\
+        	\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_shapenet_noisy_low_\noisyb_bin}
+        \end{subfigure}
+        \subcaption{\clean (Top) and \noisy (Bottom), Low Resolution ($24\ntimes54\ntimes24$)}
+    \end{subfigure}
+    \\[4px]
+    \begin{subfigure}[t]{1\textwidth}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			Obs\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_bathtub_low_\bathtuba_points}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_sup_3_2_res_\bathtuba}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_sup_3_3_res_\bathtuba}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			\ICP\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_icp_3_2_res_\bathtuba}
+   		\end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            \ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_ml_3_2_res_\bathtuba}
+        \end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			\ML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_ml_3_3_res_\bathtuba}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_vae_aml_3_2_res_\bathtuba}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_bathtub_low_10_wide_vae_aml_3_3_res_\bathtuba}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_bathtub_low_\bathtuba_gt}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_bathtub_low_\bathtuba_bin}
+   		\end{subfigure}
+   		\\[2px]
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%Obs\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_chair_low_\chaira_points}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_sup_3_2_res_\chaira}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_sup_3_3_res_\chaira}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\ICP\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_icp_3_2_res_\chaira}
+   		\end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_ml_3_2_res_\chaira}
+        \end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\ML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_ml_3_3_res_\chaira}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_vae_aml_3_2_res_\chaira}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_chair_low_10_wide_vae_aml_3_3_res_\chaira}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_chair_low_\chaira_gt}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_chair_low_\chaira_bin}
+   		\end{subfigure}
+   		\\[2px]
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%Obs\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_desk_low_\deska_points}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_sup_3_2_res_\deska}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_sup_3_3_res_\deska}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\ICP\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_icp_3_2_res_\deska}
+   		\end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_ml_3_2_res_\deska}
+        \end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\ML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_ml_3_3_res_\deska}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_vae_aml_3_2_res_\deska}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_desk_low_10_wide_vae_aml_3_3_res_\deska}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_desk_low_\deska_gt}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_desk_low_\deska_bin}
+   		\end{subfigure}
+   		\\[2px]
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%Obs\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_table_low_\tablea_points}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_sup_3_2_res_\tablea}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\Dai\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_sup_3_3_res_\tablea}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\ICP\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_icp_3_2_res_\tablea}
+   		\end{subfigure}
+        \begin{subfigure}[t]{0.095\textwidth}
+            \vspace{0px}\centering
+            %\ML\\
+            \includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_ml_3_2_res_\tablea}
+        \end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\ML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_ml_3_3_res_\tablea}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_vae_aml_3_2_res_\tablea}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%\AML\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_clean_table_low_10_wide_vae_aml_3_3_res_\tablea}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_table_low_\tablea_gt}
+   		\end{subfigure}
+   		\begin{subfigure}[t]{0.095\textwidth}
+   			\vspace{0px}\centering
+   			%GT\\
+   			\includegraphics[width=1.8cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gdat_modelnet_table_low_\tablea_bin}
+   		\end{subfigure}
+       \subcaption{ModelNet Bathtubs, Chairs, Desks and Tables, Low Resolution ($32^3$)}
+   	\end{subfigure}
+    }
+    \vspace*{-\figskipcaption px}
+    \caption{{\bf Qualitative Results on ShapeNet and ModelNet.} Results for \AML, \Dai, \Engelmann, \ICP and \ML on \clean, \noisy and ModelNet's bathtubs, chairs, desks and tables. \AML outperforms data-driven approaches (\ML, \Engelmann, \ICP) and rivals \Dai while requiring significantly less supervision. Occupancy grids and meshes in {\color{rbeige}beige}, observations in {\color{rred}red}.}
+    \label{fig:results-synthetic}
+    \vspace*{-\figskipbelow px}
+\end{figure*}

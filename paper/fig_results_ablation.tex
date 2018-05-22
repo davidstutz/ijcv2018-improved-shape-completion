@@ -1,0 +1,76 @@
+\begin{figure}[tp]
+    \vspace*{-\figskipabove px}
+    \vspace{4px}
+    \centering
+    {\scriptsize
+        
+    \newcommand{\ablationa}{33}
+    \newcommand{\ablationb}{99}
+    \newcommand{\ablationc}{528}
+    \newcommand{\ablationd}{693}
+    \newcommand{\ablatione}{231}
+    \newcommand{\ablationf}{396} % 396
+    
+    \begin{subfigure}[t]{0.01\textwidth}
+        \vspace{0px}\centering
+        \rotatebox[]{90}{\dAML\hspace*{0.25cm}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_aml_3_2_res_\ablationa}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_aml_3_2_res_\ablationb}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_aml_3_2_res_\ablationc}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_aml_3_2_res_\ablationd}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_aml_3_2_res_\ablatione}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_aml_3_2_res_\ablationf}
+    \end{subfigure}
+    \\[-4px]
+    \begin{subfigure}[t]{0.01\textwidth}
+        \vspace{0px}\centering
+        \rotatebox[]{90}{\AML\hspace*{0.25cm}}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\ablationa}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\ablationb}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\ablationc}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\ablationd}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\ablatione}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.07\textwidth}
+        \vspace{0px}\centering
+        \includegraphics[width=1.5cm,trim={\cropleft cm \croplower cm \cropright cm \cropupper cm},clip]{gexp_noisy_low_10_wide_w2_1_vae_aml_3_2_res_\ablationf}
+    \end{subfigure}
+    }
+    \vspace*{-\figskipcaption px}
+    \caption{{\bf Comparison of \AML and \dAML.} Our deterministic variant, \dAML, suffers from inferior results. Predicted shapes in {\color{rbeige}beige} and observations in {\color{rred}red} at low resolution ($24\ntimes54\ntimes24$ voxels).}
+    \label{fig:results-shape-prior}
+    \vspace*{-\figskipbelow px}
+\end{figure}

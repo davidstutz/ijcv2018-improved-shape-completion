@@ -1,0 +1,31 @@
+\begin{table}[t]
+    \vspace*{-\figskipabove px}
+    \centering
+    {\small
+        \begin{tabularx}{0.49\textwidth}{|@{ }X@{ }|@{ }c@{ }|@{ }c@{ }|@{ }c@{ }|@{ }c@{ }|}
+            \hline
+            & \multicolumn{2}{c@{ }|@{ }}{\bf Synthetic} & \multicolumn{2}{@{ }c@{ }|}{\bf Real}\\
+            \hline
+            & \clean/-noisy & ModelNet & KITTI & \Kinect\\
+            \hline\hline
+            \multicolumn{5}{|@{ }c@{ }|}{Training/Test Sets}\\[-2px]
+            \multicolumn{5}{|@{ }c@{ }|}{\scriptsize\#Shapes for Shape Prior, \#Views for Shape Inference}\\
+            \hline
+            \#Shapes & 500/100 & 1000/200& \color{gray}-- & \color{gray}-- \\
+            \#Views & 5000/1000 & 10000/2000& 8442/9194 & 30/10\\
+            \hline
+            \hline
+            \multicolumn{5}{|@{ }c@{ }|}{Observed Voxels in \% ({\bf\color{rred}$<5\%$}) \& Resolutions}\\[-2px]
+            \multicolumn{5}{|@{ }c@{ }|}{\tiny Low = $24\ntimes54\ntimes24$/$32^3$; Medium = $32\ntimes72\ntimes32$/$48^3$; High = $48\ntimes108\ntimes48$/$64^3$}\\
+            \hline
+            Low & 7.66/3.86 & 9.71& 6.79 & \bf\color{rred}0.87\\
+            Medium & 6.1/\bf\color{rred}2.13 & 8.74& 5.24 & \color{gray}--\\
+            High & \bf\color{rred}2.78/\bf\color{rred}0.93 & 8.28& \bf\color{rred}3.44 & \color{gray}--\\
+            \hline
+        \end{tabularx}
+    }
+    \vspace*{-\figskipcaption px}
+	\caption{{\bf Dataset Statistics.} We report the number of (rotated and scaled) meshes, used as reference shapes, and the resulting number of observations (\ie, views, $10$ per shape). We also report the average percentage of observed voxels. For ModelNet, we exemplarily report statistics for chairs; and for \Kinect, we report statistics for tables.}
+	\label{tab:data}
+    \vspace*{-\figskipbelow px}
+\end{table}

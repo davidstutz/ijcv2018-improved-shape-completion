@@ -1,0 +1,15 @@
+[submodule "code/aml-improved-shape-completion"]
+	path = code/aml-improved-shape-completion
+	url = https://github.com/davidstutz/aml-improved-shape-completion
+[submodule "code/mesh-fusion"]
+	path = code/mesh-fusion
+	url = https://github.com/davidstutz/mesh-fusion
+[submodule "code/mesh-voxelization"]
+	path = code/mesh-voxelization
+	url = https://github.com/davidstutz/mesh-voxelization
+[submodule "code/mesh-evaluation"]
+	path = code/mesh-evaluation
+	url = https://github.com/davidstutz/mesh-evaluation
+[submodule "code/bpy-visualization-utils"]
+	path = code/bpy-visualization-utils
+	url = https://github.com/davidstutz/bpy-visualization-utils
