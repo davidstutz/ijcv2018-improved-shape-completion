@@ -27,7 +27,7 @@ Here, you can find:
 
 * `paper/`: the LaTeX source of the final paper.
 * `code/`:
-    * [davidstutz/aml-improved-shape-completion](https://github.com/davidstutz/daml-shape-completion),
+    * [davidstutz/aml-improved-shape-completion](https://github.com/davidstutz/aml-improved-shape-completion),
       Torch and C++ implementation of the proposed approach and baselines as well
       as the created benchmarks.
     * [davidstutz/mesh-evaluation](https://github.com/davidstutz/mesh-evaluation),
