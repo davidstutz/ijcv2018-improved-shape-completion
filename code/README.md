@@ -4,7 +4,7 @@ The code is spread over the following repositories, which are included
 as sub-repositories. Use `git clone --recursive` for cloning the
 subrepositories.
 
-* [davidstutz/aml-improved-shape-completion](https://github.com/davidstutz/daml-shape-completion),
+* [davidstutz/aml-improved-shape-completion](https://github.com/davidstutz/aml-improved-shape-completion),
   Torch and C++ implementation of the proposed approach and baselines as well
   as the created benchmarks.
 * [davidstutz/mesh-evaluation](https://github.com/davidstutz/mesh-evaluation),
