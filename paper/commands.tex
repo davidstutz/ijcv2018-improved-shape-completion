@@ -133,9 +133,7 @@
 
 % comments
 \definecolor{darkgreen}{rgb}{0,0.7,0}
-\newcommand{\ag}[1]{ \noindent {\color{red} {\bf Andreas:} {#1}} }
-\newcommand{\ds}[1]{ \noindent {\color{red} {\bf David:} {#1}} }
-\newcommand{\red}[1]{\noindent{\color{red}{#1}}}
+\newcommand{\red}[1]{#1}
 \newcommand{\green}[1]{\noindent{\color{green}{#1}}}
 \newcommand{\todo}[1]{{\color{red}Todo: #1. \xspace}}
 
@@ -170,17 +168,24 @@
 \hyphenation{Model-Net}
 \hyphenation{di-men-sion-al}
 
-% colors
 \definecolor{rred}{rgb}{0.65,0.23,0.25}
 \definecolor{rbeige}{rgb}{0.66,0.45,0.23 }
 \definecolor{rgreen}{rgb}{0.22,0.54,0.19}
 \definecolor{lightgray}{rgb}{0.75,0.75,0.75}
 
-\newcommand{\cropleft}{0.9}
-\newcommand{\croplower}{0.9}
-\newcommand{\cropright}{0.9}
-\newcommand{\cropupper}{1.1}
+\newcommand{\cropleft}{2}
+\newcommand{\croplower}{2}
+\newcommand{\cropright}{2}
+\newcommand{\cropupper}{1.9}
 
-\newcommand{\figskipabove}{0}
-\newcommand{\figskipcaption}{1.5}
-\newcommand{\figskipbelow}{1.5}
+\newcommand{\figskipabove}{2}
+\newcommand{\figskipcaption}{2} % 1.5
+\newcommand{\figskipbelow}{2} % 1.5
+
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}

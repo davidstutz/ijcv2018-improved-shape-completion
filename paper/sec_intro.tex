@@ -3,10 +3,114 @@
 
 \input{fig_introduction}
 \begin{figure*}
-    \vspace*{-\figskipabove px}
-    \vspace*{\figskipabove px}
+	\vspace*{-4px}
     \centering
-    \includegraphics[width=1\linewidth]{fig_method}
+    \begin{tikzpicture}
+        % ---------------------------------------------------------
+        \node[anchor=west] at (-1.25, 3.75) {{\footnotesize{\bf(1) Shape Prior} (Section 3.2)}};
+        
+        \node[rectangle,draw=black,anchor=west] (prior) at (-1,2.5) {
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_66_gt_only}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_132_gt_only}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_198_gt_only}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_264_gt_only}
+        };
+        \node at (1.6,3.3) {\scriptsize Synthetic Reference Shapes};
+        
+        \node[] (y) at (0, -1.5) {\scriptsize Shape $y$};
+        
+        \node[rectangle,draw=black,anchor=west] (input) at (-1, 0) {
+            \begin{tabular}{c}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_0_gt_only}\\
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_0_bin_only}
+            \end{tabular}
+        };  
+        
+        \draw ($(input.north east) + (0.2,0)$) -- ($(input.north east) + (1.5,-0.75)$) -- ($(input.north east) + (1.5,-1.75)$) -- ($(input.south east) + (0.2,0)$) -- ($(input.north east) + (0.2,0)$);
+        \node at ($(input.east) + (0.825,0)$) {\scriptsize encoder};
+        
+        \node (z) at (2.75, 0) {\scriptsize $z$};
+        
+        \node[rectangle,draw=black,anchor=east] (output) at (6.5, 0) {
+            \begin{tabular}{c}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_3_2_res_0}\\
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_shapenet_3_3_results_only_results_0}
+            \end{tabular}
+        };
+        
+        \draw ($(output.north west) - (0.2,0)$) -- ($(output.north west) - (1.5,0.75)$) -- ($(output.north west) - (1.5,1.75)$) -- ($(output.south west) - (0.2,0)$) -- ($(output.north west) - (0.2,0)$);
+        \node at ($(output.west) - (0.825,0)$) {\scriptsize decoder};
+        
+        \node (ry) at (5.5, -1.5) {\scriptsize Rec. Shape $\tilde{y}$};
+        
+        \node[] (L) at (2.75, -1.9) {\scriptsize Reconstruction Loss};
+        
+        \draw[-] (ry) -- ($(ry) - (0,0.4)$);
+        \draw[-] ($(ry) - (0,0.4)$) -- (L);
+        \draw[-] (y) -- ($(y) - (0,0.4)$);
+        \draw[-] ($(y) - (0,0.4)$) -- (L);
+        
+        % --
+        \draw[-] (3.5, 0.85) -- (3.5, 1.5);
+        \draw[-] (3.5, 1.5) -- (12.5, 1.5);
+        \draw[->] (12.5, 1.5) -- (12.5, 0.85);
+        \node at (7.25, 1.75) {\scriptsize retain fixed decoder};
+        
+        \draw[-,dotted] (7.25,-2.15) -- (7.25,1.45);
+        \draw[-,dotted] (7.25,2) -- (7.25,2.45);
+        \draw[-,dotted] (7.25,3) -- (7.25,4.05);
+        
+        \node at (7.25, 2.75) {\scriptsize\textbf{no correspondence needed}};
+        \begin{scope}[shift={(9,0)}]
+        
+        % ---------------------------------------------------------
+        \node[anchor=west] at (-1.25, 3.75) {{\footnotesize{\bf(2) Shape Inference} (Section 3.3)}};
+        
+        \node[rectangle,draw=black,anchor=east] (inference) at (6.5,2.5) {
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_1530_points}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_0_points}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_2448_points}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_3366_points}
+        };
+        \node at (3.8,3.3) {\scriptsize Real Observations w/o Targets};
+        
+        % --
+        \draw[-] (prior) -- (inference);
+        
+        \node[] (y) at (0, -1.5) {\scriptsize Observation $x$};
+        
+        \node[rectangle,draw=black,anchor=west] (input) at (-1, 0) {
+            \begin{tabular}{c}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_1224_points}\\
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_1224_bin_points}
+            \end{tabular}
+        };
+        
+        \draw ($(input.north east) + (0.2,0)$) -- ($(input.north east) + (1.5,-0.75)$) -- ($(input.north east) + (1.5,-1.75)$) -- ($(input.south east) + (0.2,0)$) -- ($(input.north east) + (0.2,0)$);
+        \node at ($(input.east) + (0.825,0)$) {\scriptsize\begin{tabular}{c}new\\encoder\end{tabular}};
+        
+        \node (z) at (2.75, 0) {\scriptsize $z$};
+        
+        \node[rectangle,draw=black,anchor=east] (output) at (6.5, 0) {
+            \begin{tabular}{c}
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_3_2_res_1224}\\
+            \includegraphics[height=1cm,trim={3cm 3cm 3cm 3cm},clip]{gfx_method_kitti_3_3_res_1224}
+            \end{tabular}
+        };
+        
+        \draw ($(output.north west) - (0.2,0)$) -- ($(output.north west) - (1.5,0.75)$) -- ($(output.north west) - (1.5,1.75)$) -- ($(output.south west) - (0.2,0)$) -- ($(output.north west) - (0.2,0)$);
+        \node at ($(output.west) - (0.825,0)$) {\scriptsize \begin{tabular}{c}fixed\\decoder\end{tabular}};
+        
+        \node (ry) at (5.5, -1.5) {\scriptsize Prop. Shape $\tilde{y}$};
+        
+        \node[] (L) at (2.75, -1.9) {\scriptsize Maximum Likelihood Loss};
+        
+        \draw[-] (ry) -- ($(ry) - (0,0.4)$);
+        \draw[-] ($(ry) - (0,0.4)$) -- (L);
+        \draw[-] (y) -- ($(y) - (0,0.4)$);
+        \draw[-] ($(y) - (0,0.4)$) -- (L);
+        \end{scope}
+    \end{tikzpicture}
     \vspace*{-12px}
     \caption{{{\bf Amortized Maximum Likelihood (AML) for 3D Shape Completion on KITTI.}
             (1) We train a denoising variational auto-encoder (\DVAE) \citep{Kingma2014ICLR,Im2017AAAI} as shape prior on ShapeNet using occupancy grids and signed distance functions (SDFs) to represent shapes. (2) The fixed generative model, \ie, decoder, then allows to learn shape completion using an unsupervised maximum likelihood (\ML) loss by training a new recognition model, \ie, encoder. The retained generative model constraints the space of possible shapes while the \ML loss aligns the predicted shape with the observations.}}

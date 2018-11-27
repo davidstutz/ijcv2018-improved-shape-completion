@@ -1,17 +1,16 @@
 \subsection{Baselines}
 \label{sec:baselines}
 
-\input{fig_results_shape_prior}
-
 \boldparagraph{Data-Driven Approaches}
 %
 {We consider the works by \cite{Engelmann2016GCPR} and \cite{Gupta2015CVPR} as data-driven baselines. Additionally, we consider regular maximum likelihood (\ML). \cite{Engelmann2016GCPR} -- referred to as \Engelmann\xspace-- use a principal component analysis shape prior trained on a manually selected set of car models\footnote{\url{https://github.com/VisualComputingInstitute/ShapePriors_GCPR16}}. Shape completion is posed as optimization problem considering both shape and pose. The pre-trained shape prior provided by Engelmann \etal assumes a ground plane which is, according to KITTI's LiDAR data, fixed at $1m$ height. Thus, we don't need to optimize pose on KITTI as we use the ground truth bounding boxes; on ShapeNet, in contrast, we need to optimize both pose and shape to deal with the random rotations in \clean and \noisy.}
 
+\input{fig_results_latent_space}
+\input{tab_results_shapenet_kitti}
+
 Inspired by the work by \cite{Gupta2015CVPR} we also consider a shape retrieval and fitting baseline. Specifically, we perform iterative closest point (\ICP) \citep{Besl1992PAMI} fitting on all training shapes and subsequently select the best-fitting one. To this end, we uniformly sample $1\text{Mio}$ points on the training shapes, and perform point-to-point \ICP\footnote{\url{http://www.cvlibs.net/software/libicp/}.} for a maximum of $100$ iterations using $\left[\begin{matrix}R & t\end{matrix}\right] = \left[\begin{matrix}I_3 & 0\end{matrix}\right]$ as initialization. On the training set, we verified that this approach is always able to retrieve the perfect shape.
 
 Finally, we consider a simple \ML baseline iteratively minimizing \eqnref{eq:ml} using stochastic gradient descent (SGD). This baseline is similar to the work by Engelmann \etal, however, like ours it is bound to the voxel grid. Per example, we allow a maximum of $5000$ iterations, starting with latent code $z = 0$, learning rate $0.05$ and momentum $0.5$ (decayed every $50$ iterations at rate $0.85$ and $1.0$ until $10^{-5}$ and $0.9$ have been reached).
-
-\input{fig_results_ablation}
 
 \boldparagraph{Learning-Based Approaches}
 %

@@ -2,17 +2,15 @@
 
 This repository contains paper and code corresponding to:
 
-D. Stutz, A. Geiger. **Learning 3D Shape Completion under Weak Supervision.** CoRR, abs/1805.07290.
+D. Stutz, A. Geiger. **Learning 3D Shape Completion under Weak Supervision.** International Journal of Computer Vision (2018). [[ArXiv](http://arxiv.org/abs/1805.07290) | [Springer Link](https://link.springer.com/article/10.1007/s11263-018-1126-y)]
 
 Please cite as:
 
     @article{Stutz2018ARXIV,
         author    = {David Stutz and Andreas Geiger},
         title     = {Learning 3D Shape Completion under Weak Supervision},
-        journal   = {CoRR},
-        volume    = {abs/1805.07290},
+        journal   = {International Journal of Computer Vision},
         year      = {2018},
-        url       = {http://arxiv.org/abs/1805.07290},
     }
 
 This work is based on our earlier CVPR'18 paper
@@ -25,7 +23,7 @@ and the repository for our CVPR publication:
 
 Here, you can find:
 
-* `paper/`: the LaTeX source of the final paper.
+* `paper/`: the LaTeX source of the paper, as available on ArXiv.
 * `code/`:
     * [davidstutz/aml-improved-shape-completion](https://github.com/davidstutz/aml-improved-shape-completion),
       Torch and C++ implementation of the proposed approach and baselines as well

@@ -531,12 +531,13 @@ later}
  \global\let\and\relax}
 
 \def\makeheadbox{{%
-\hbox to0pt{\vbox{\baselineskip=10dd\hrule\hbox
-to\hsize{\vrule\kern3pt\vbox{\kern3pt
-\hbox{\bfseries\@journalname\ manuscript No.}
-\hbox{(will be inserted by the editor)}
-\kern3pt}\hfil\kern3pt\vrule}\hrule}%
-\hss}}}
+%\hbox to0pt{\vbox{\baselineskip=10dd\hrule\hbox
+%to\hsize{\vrule\kern3pt\vbox{\kern3pt
+%\hbox{\bfseries\@journalname\ manuscript No.}
+%\hbox{(will be inserted by the editor)}
+%\kern3pt}\hfil\kern3pt\vrule}\hrule}%
+%\hss}
+}}
 %
 \def\rubric{\setbox0=\hbox{\small\strut}\@tempdima=\ht0\advance
 \@tempdima\dp0\advance\@tempdima2\fboxsep\vrule\@height\@tempdima

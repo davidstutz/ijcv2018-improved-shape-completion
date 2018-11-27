@@ -1,16 +1,14 @@
-\subsection{Experimental Evaluation}
-\label{sec:experiments}
-
-Quantitative results are summarized in \tabref{tab:results-shapenet} (ShapeNet and KITTI) and \ref{tab:results-modelnet} (ModelNet). Qualitative results for the shape prior are shown in \figref{fig:results-shape-prior} and \ref{fig:results-latent-space}; shape completion results are shown in \figref{fig:results-synthetic} (ShapeNet and ModelNet) and \ref{fig:results-real} (KITTI and \Kinect).
-
-\input{fig_results_latent_space}
-\input{tab_results_shapenet_kitti}
 \input{fig_results_synthetic}
 \input{tab_results_modelnet}
 \input{fig_results_synthetic_extra}
 \input{fig_results_multi_category}
 \input{fig_results_real}
 \input{fig_results_failures}
+
+\subsection{Experimental Evaluation}
+\label{sec:experiments}
+
+Quantitative results are summarized in \tabref{tab:results-shapenet} (ShapeNet and KITTI) and \ref{tab:results-modelnet} (ModelNet). Qualitative results for the shape prior are shown in \figref{fig:results-shape-prior} and \ref{fig:results-latent-space}; shape completion results are shown in \figref{fig:results-synthetic} (ShapeNet and ModelNet) and \ref{fig:results-real} (KITTI and \Kinect).
 
 \boldparagraph{Latent Space Dimensionality}
 %
@@ -32,7 +30,7 @@ For ModelNet, in \tabref{tab:results-modelnet}, we mostly focus on occupancy gri
 
 \boldparagraph{Multiple Views and Higher Resolutions}
 %
-In \tabref{tab:results-shapenet}, we consider multiple, $k \in \{2,3,5\}$, randomly fused observations (from the $10$ views per shape). Generally, additional observations are beneficial (also \cf \figref{fig:results-synthetic-extra}); however, fully-supervised approaches such as \Dai benefit more significantly than \AML. Intuitively, especially on \noisy, $k = 5$ noisy observations seem to impose contradictory constraints that cannot be resolved under weak supervision. We also show that higher resolution allows both \AML and \Dai to predict more detailed shapes, see \figref{fig:results-synthetic-extra}; for \AML this is significant as, \eg, on \noisy, the level of supervision reduces to less than $1\%$.
+In \tabref{tab:results-shapenet}, we consider multiple, $k \in \{2,3,5\}$, randomly fused observations (from the $10$ views per shape). Generally, additional observations are beneficial (also \cf \figref{fig:results-synthetic-extra}); however, fully-supervised approaches such as \Dai benefit more significantly than \AML. Intuitively, especially on \noisy, $k = 5$ noisy observations seem to impose contradictory constraints that cannot be resolved under weak supervision. We also show that higher resolution allows both \AML and \Dai to predict more detailed shapes, see \figref{fig:results-synthetic-extra}; for \AML this is significant as, \eg, on \noisy, the level of supervision reduces to less than $1\%$. \red{Also note that \AML is able to handle the slightly asymmetric desks in \figref{fig:results-synthetic-extra} due to the strong shape prior which itself includes symmetric and less symmetric shapes.}
 
 \boldparagraph{Multiple Object Categories}
 %
